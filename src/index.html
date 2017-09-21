@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+
+	<link rel="stylesheet" href="src/css/main.css">
+	
+	<style>
+		td,th{
+			text-align: center;
+			border: 1px solid #000;
+		}
+		div#json_table{
+			margin: 10% auto;
+			width: 80%;
+			}
+			@media only screen and (max-width: 920px){
+				div#json_table{
+					width: 100%;
+					margin: 10% 0;
+				}
+			}
+
+
+			@media only screen and (max-width: 720px){
+				html{
+					font-size: 0.5rem;
+				}
+				.submit_button, .reset_button{
+					width: 100px;
+					height: 20px
+				}
+			}
+	</style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<header>
+<nav>
+	<div class="container">
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo">Choose your university!</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contacts</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li><a href="#">About</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Contacts</a></li>
+      </ul>
+    </div>
+    </div>
+  </nav>
+</header>
+ <main>
+	<form action="#">
+    <p><input type="text" class="text_input" name="input_country" placeholder="type a country name here"></p> 
+    <p><input type="button" class="submit_button" value="submit">
+    <input type="button" class="reset_button" value="reset">
+    </p>
+		<p> <span id="count"></span> Checked</p>
+       
+      
+      
+    
+  	</form>
+	
+	<div id="json_table"></div>		
+
+</main>
+
+
+
+ <footer class="page-footer">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Footer Content</h5>
+                <p class="grey-text text-lighten-4">You can use rows and columns<br>here to organize your footer content.</p>
+              </div>
+              <div class="col l4 offset-l2 s12">
+                <h5 class="white-text">Links</h5>
+                <ul>
+                  <li><a class="grey-text text-lighten-3" href="https://github.com/Vaynenoir"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a></li>
+                  <li><a class="grey-text text-lighten-3" href="https://bitbucket.org/Vaynenoir/"><i class="fa fa-bitbucket-square fa-2x" aria-hidden="true"></i></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            © 2017 All rights are reserved
+            <a class="grey-text text-lighten-4 right" href="#!"><span id="date"></span></a>
+            </div>
+          </div>
+        </footer>
+
+
+	<script type="text/javascript" src="src/script.js"></script>
+
+	<script src="https://use.fontawesome.com/ebbea5bb39.js"></script>
+	
+</body>
+</html>
