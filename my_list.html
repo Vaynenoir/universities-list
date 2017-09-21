@@ -4,22 +4,56 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link type="text/css" rel="stylesheet" href="src/css/materialize.min.css"  media="screen,projection"/>
-
-	<link rel="stylesheet" href="src/css/main.css">
 	
 	<style>
-		td,th{
+			* {
+		  margin: 0;
+		  padding: 0;
+		}
+		html,
+		body {
+		  height: 100%;
+		}
+				.wrapper {
+		  display: flex;
+		  flex-direction: column;
+		  height: 100%;
+		}
+		.content {
+  flex: 1 0 auto;
+}
+		h1{
+			text-align: center;
+			color: #8ddcd5;
+		}
+		table{
+			border: 1px solid #000;
+		}
+			td,th{
 			text-align: center;
 			border: 1px solid #000;
 		}
-		div#json_table{
-			margin: 10% auto;
-			width: 80%;
-			}
+		div#myTable{
+			width: 80%!important;
+			margin: 0 auto;
+		}
+		footer{
+			flex: 0 0 auto;
+		}
+		.button_block{
+			width: 100%;
+			    text-align: center;
+    margin: 0 auto;
+			
+		}
+		.btn{
+			margin: 5% 0;
+			display:inline;
+			text-align: center;
+		}
 			@media only screen and (max-width: 920px){
-				div#json_table{
+				div#myTable{
 					width: 100%;
-					margin: 10% 0;
 				}
 			}
 
@@ -28,28 +62,26 @@
 				html{
 					font-size: 0.5rem;
 				}
-				.submit_button, .reset_button{
-					width: 100px;
-					height: 20px
-				}
 			}
 	</style>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
 </head>
 <body>
-<header>
+	<div class="wrapper">
+	<div class="content">
+	<header>
 <nav>
 	<div class="container">
     <div class="nav-wrapper">
       <a href="index.html" class="brand-logo">Choose your university!</a>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="my_list.html">My list(<span id = "count_list"></span>)</a></li>
+        <li><a href="#">My list</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contacts</a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
-        <li><a href="my_list.html">My list(<span id = "count_list_mobile"></span>)</a></li>
+        <li><a href="#">My list(<span id = "count_list_mobile"></span>)</a></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Contacts</a></li>
       </ul>
@@ -57,30 +89,19 @@
     </div>
   </nav>
 </header>
- <main>
-	<form action="#">
-    <p><input type="text" class="text_input" name="input_country" placeholder="type a country name here"></p> 
-    <p><input type="button" class="submit_button" value="submit">
-    <input type="button" class="reset_button" value="reset">
-    </p>
-		<p> <span id="count"></span> Checked</p>
-    
-      
-      
-    
-  	</form>
-	
-      
- 
-	<div id="json_table" style="text-align: center;">
-     <div id="loading" style="margin: 0 auto;"> </div>
-  </div>		
 
+<main>
+	<h1></h1>
+	<div id="myTable" style="margin: 18% auto; text-align: center;">
+		<div id="loading" style="margin: 0 auto;" ></div>
+	</div>
+	<div class="button_block">
+	<button class="btn" id="delete_selected">Delete(<span id="SelectedCount">0</span>)</button>
+	</div>
 </main>
+</div>
 
-
-
- <footer class="page-footer">
+<footer class="page-footer">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
@@ -104,11 +125,12 @@
           </div>
         </footer>
 
-	<script type="text/javascript" src="src/libs/jquery/jquery-3.2.1.min.js"></script>
-		<script type="text/javascript" src="src/js_es6/materialize.min.js"></script>
-	<script type="text/javascript" src="dist/js_es6/script.js"></script>
+</div>
+
+<script type="text/javascript" src="src/libs/jquery/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="src/js_es6/materialize.min.js"></script>
+	<script type="text/javascript" src="dist/js_es6/my_list.js"></script>
 
 	<script src="https://use.fontawesome.com/ebbea5bb39.js"></script>
-	
 </body>
 </html>

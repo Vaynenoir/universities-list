@@ -1,14 +1,31 @@
 {
+<<<<<<< HEAD
   "name": "3rd_task_solution",
+=======
+  "name": "ES6",
+>>>>>>> script is written on ES6, posibity to save and delete universities from users list, add preloader
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+=======
+    "build": "babel src -d dist --presets es2015",
+    "watch": "babel src -d dist --presets es2015 -w"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+>>>>>>> script is written on ES6, posibity to save and delete universities from users list, add preloader
     "gulp": "^3.9.1",
     "gulp-sass": "^3.1.0"
   }
