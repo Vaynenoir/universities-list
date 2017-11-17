@@ -6,131 +6,324 @@
 	<link type="text/css" rel="stylesheet" href="src/css/materialize.min.css"  media="screen,projection"/>
 	
 	<style>
-			* {
-		  margin: 0;
-		  padding: 0;
-		}
-		html,
-		body {
-		  height: 100%;
-		}
-				.wrapper {
-		  display: flex;
-		  flex-direction: column;
-		  height: 100%;
-		}
-		.content {
-  flex: 1 0 auto;
-}
-		h1{
-			text-align: center;
-			color: #8ddcd5;
-		}
-		table{
-			border: 1px solid #000;
-		}
-			td,th{
-			text-align: center;
-			border: 1px solid #000;
-		}
-		div#myTable{
-			width: 80%!important;
-			margin: 0 auto;
-		}
-		footer{
-			flex: 0 0 auto;
-		}
-		.button_block{
-			width: 100%;
-			    text-align: center;
-    margin: 0 auto;
-			
-		}
-		.btn{
-			margin: 5% 0;
-			display:inline;
-			text-align: center;
-		}
-			@media only screen and (max-width: 920px){
-				div#myTable{
-					width: 100%;
-				}
-			}
+	.red {
+	    background-color: red;
+	}
+	* {
+	    margin: 0;
+	    padding: 0;
+	}
+	html,
+	body {
+	    height: 100%;
+	}
+	.wrapper {
+	    display: flex;
+	    flex-direction: column;
+	    height: 100%;
+	}
+	.content {
+	    flex: 1 0 auto;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	}
+	h1 {
+	    text-align: center;
+	    color: #8ddcd5;
+	    margin: 5% 0;
+	}
+	table {
+	    border: 1px solid #000;
+	}
+	td,
+	th {
+	    text-align: center;
+	    border: 1px solid #ccc;
+	}
+	div#myTable {
+	    width: 80%!important;
+	    margin: 0 auto;
+	}
+	footer {
+	    flex: 0 0 auto;
+	}
+	.button_block {
+	    width: 100%;
+	    text-align: center;
+	    margin: 5% auto;
+	}
+	.btn {
+	    margin: 0 0 2%;
+	    display: inline;
+	    text-align: center;
+	}
+	@media only screen and (max-width: 920px) {
+	    div#myTable {
+	        width: 100%;
+	    }
+	}
+	@media only screen and (max-width: 700px) {
+	    td,
+	    th {
+	        border-bottom: 3px solid #ccc!important;
+	    }
+	    tbody {
+	        width: 100%;
+	    }
+	    table {
+	        width: 100%;
+	    }
+	    th,
+	    tr td {
+	        display: block;
+	    }
+	    tr td:first-child:before {
+	        content: 'UNIVERSITY: ';
+	    }
+	    th {
+	        display: none;
+	    }
+	    tr td:first-child {
+	        background-color: #ccc;
+	    }
+	}
+	/*pop up*/
+	i.btn{
+		background-color: #ccc!important;
+	}
+	.modal .modalInput {
+	    padding: 0!important;
+	}
+	.modal_styles {
+
+	    display: none;
+	    position: fixed;
+	    z-index: 1;
+	    padding-top: 100px;
+	    left: 0;
+	    top: 0;
+	    right: 0;
+	    bottom: 0;
+	
+	    width: 100%;
+	    height: 100%;
+	    overflow: auto;
+	    border-radius: 12px;
+	    background-color: rgb(0, 0, 0);
+	    background-color: rgba(0, 0, 0, 0.8);
+	}
+	textarea {
+	    height: 8rem;
+	}
+	.flex_container {
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: center;
+	    align-items: center;
+	}
+	.modalInput {
+	    margin: auto;
+	    color: #fff;
+	    width: 80%;
+	    min-width: 700px;
+	    min-height: 90px;
+	    max-height: 280px;
+	    font-style: italic;
+	    max-width: 700px;
+	}
+	#caption {
+	    margin: auto;
+	    display: block;
+	    width: 80%;
+	    max-width: 700px;
+	    text-align: center;
+	    color: #ccc;
+	    padding: 10px 0;
+	    height: 150px;
+	}
+	.modalInput,
+	#caption {
+	    -webkit-animation-name: zoom;
+	    -webkit-animation-duration: 0.6s;
+	    animation-name: zoom;
+	    animation-duration: 0.6s;
+	}
+	.close_img {
+	    position: absolute;
+	    top: -15px;
+	    right: 6px;
+	    color: #000;
+	    font-size: 40px;
+	    font-weight: bold;
+	    -webkit-transition: 0.3s;
+	    -o-transition: 0.3s;
+	    transition: 0.3s;
+	    cursor: pointer;
+	}
+	.close {
+	    position: absolute;
+	    top: 15px;
+	    right: 35px;
+	    color: #fff;
+	    font-size: 40px;
+	    font-weight: bold;
+	    -webkit-transition: 0.3s;
+	    -o-transition: 0.3s;
+	    transition: 0.3s;
+	}
+	.close:hover,
+	.close:focus {
+	    color: #bbb;
+	    text-decoration: none;
+	    cursor: pointer;
+	}
+	/*pop up end*/
+	
+	.fa:hover {
+	    color: #039be0;
+	}
+	.submit_button:hover {
+	    background-color: #039be0;
+	}
 
 
-			@media only screen and (max-width: 720px){
-				html{
-					font-size: 0.5rem;
-				}
-			}
+
 	</style>
 	
 </head>
 <body>
-	<div class="wrapper">
-	<div class="content">
-	<header>
-<nav>
-	<div class="container">
-    <div class="nav-wrapper">
-      <a href="index.html" class="brand-logo">Choose your university!</a>
-      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="#">My list</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contacts</a></li>
-      </ul>
-      <ul class="side-nav" id="mobile-demo">
-        <li><a href="#">My list(<span id = "count_list_mobile"></span>)</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contacts</a></li>
-      </ul>
-    </div>
-    </div>
-  </nav>
-</header>
+<div class="wrapper">
+    <div class="content">
+        <header>
+            <nav>
+                <div class="container">
+                    <div class="nav-wrapper">
+                        <a href="index.html" class="brand-logo">Choose your university!</a>
+                        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="#">My list(<span id = "count_list"></span>)</a>
+                            </li>
+                            <li><a class="modal-trigger"  href="#modal1">About</a>
+                            </li>
+                            <li><a href="#">Contacts</a>
+                            </li>
+                        </ul>
+                        <ul class="side-nav" id="mobile-demo">
+                            <li><a href="index.html">Choice list(<span id = "count_list_mobile"></span>)</a>
+                            </li>
+                            <li><a class="modal-trigger"  href="#modal1">About</a>
+                            </li>
+                            <li><a href="#">Contacts</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
 
-<main>
-	<h1></h1>
-	<div id="myTable" style="margin: 18% auto; text-align: center;">
-		<div id="loading" style="margin: 0 auto;" ></div>
-	</div>
-	<div class="button_block">
-	<button class="btn" id="delete_selected">Delete(<span id="SelectedCount">0</span>)</button>
-	</div>
-</main>
-</div>
+        <main>
+            <h1></h1>
+            <div id="myTable" style="margin: 2% auto; text-align: center;">
+                <div id="loading" style="margin: 0 auto;"></div>
+            </div>
+            <div class="button_block">
+                <button class="btn" id="delete_selected">Delete(<span id="SelectedCount">0</span>)</button>
+            </div>
 
-<footer class="page-footer">
-          <div class="container">
+
+
+						
+            <div id="CommentModal" class="modal modal_styles modal-fixed-footer">
+                
+                <div class="flex_container modal-content modal-content_styles">
+                    <h2 style="text-align: center; color: #fff;">LEAVE YOUR COMMENT HERE</h2>
+                    <textarea type="text" placeholder="Type your text here" class="modalInput" id="comment_data">
+                    </textarea>
+                    <input type="submit" class="submit_button" value="Submit" style="  width: 200px;
+  height: 40px;
+  border-radius: 10px;
+  outline: none;
+  color: #fff;
+  text-transform: uppercase;
+  background-color: #4590b3;
+  border: none;
+  margin-top: 2rem;
+  letter-spacing: 2px;
+  font-weight: bold;">
+
+                    					
+                </div>
+                <div class="caption"></div>
+                <span class="close" onclick="$('#CommentModal').modal('close')"">&times;</span>	
+            </div>
+						
+
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>About this project</h4>
+      <p style="line-height: 28px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+
+      Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+
+      Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+
+      Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+    </div>
+  </div>
+
+
+
+
+        </main>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <footer class="page-footer">
+        <div class="container">
             <div class="row">
-              <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns<br>here to organize your footer content.</p>
-              </div>
-              <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
-                <ul>
-                  <li><a class="grey-text text-lighten-3" href="https://github.com/Vaynenoir"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a></li>
-                  <li><a class="grey-text text-lighten-3" href="https://bitbucket.org/Vaynenoir/"><i class="fa fa-bitbucket-square fa-2x" aria-hidden="true"></i></a></li>
-                </ul>
-              </div>
+                <div class="col l6 s12">
+                    <h5 class="white-text">Universities list</h5>
+                    <p class="grey-text text-lighten-4">Online web application where you can easily find universities by country</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Social links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="https://github.com/galanix/universities-list"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a>
+                        </li>
+                     
+                    </ul>
+                </div>
             </div>
-          </div>
-          <div class="footer-copyright">
+        </div>
+        <div class="footer-copyright">
             <div class="container">
-            © 2017 All rights are reserved
-            <a class="grey-text text-lighten-4 right" href="#!"><span id="date"></span></a>
+                © 2017, Galanix. All rights reserved.
+                <p class="grey-text text-lighten-4 right" >Today is: <span id="date"></span></p>
             </div>
-          </div>
-        </footer>
+        </div>
+    </footer>
 
 </div>
 
 <script type="text/javascript" src="src/libs/jquery/jquery-3.2.1.min.js"></script>
-	<script type="text/javascript" src="src/js_es6/materialize.min.js"></script>
-	<script type="text/javascript" src="dist/js_es6/my_list.js"></script>
-
-	<script src="https://use.fontawesome.com/ebbea5bb39.js"></script>
+<script type="text/javascript" src="src/js_es6/materialize.min.js"></script>
+<script type="text/javascript" src="dist/js_es6/my_list.js"></script>
+<script src = "dist/js_es6/Overlay.js"></script>
+<script src="https://use.fontawesome.com/ebbea5bb39.js"></script>
 </body>
 </html>

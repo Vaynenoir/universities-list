@@ -77,6 +77,7 @@ $('#date').text(RealDate(d));
 var checkedID = [];
 function displayCount() {
     $('#count').text(count);
+   
 }
 
 function checkboxCount() {

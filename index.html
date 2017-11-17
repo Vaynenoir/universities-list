@@ -10,12 +10,15 @@
 	<style>
 		td,th{
 			text-align: center;
-			border: 1px solid #000;
+			border: 1px solid #ccc;
 		}
 		div#json_table{
 			margin: 10% auto;
 			width: 80%;
 			}
+    .grey-text{
+      margin: 0;
+    }
 			@media only screen and (max-width: 920px){
 				div#json_table{
 					width: 100%;
@@ -24,15 +27,37 @@
 			}
 
 
-			@media only screen and (max-width: 720px){
-				html{
-					font-size: 0.5rem;
-				}
+			@media only screen and (max-width: 700px){
 				.submit_button, .reset_button{
 					width: 100px;
 					height: 20px
 				}
+        td,th{
+          border-bottom: 3px solid #ccc!important;
+        }
+        tbody{
+          width:100%;
+        }
+                table{
+
+          width: 100%;
+        }
+      th, tr td{
+        display: block;
+      
 			}
+      tr td:first-child:before{
+        content: 'UNIVERSITY: ';
+
+      }
+      th{
+        display: none;
+      }
+      tr td:first-child{
+        background-color: #ccc;
+      }
+
+      }
 	</style>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
@@ -45,13 +70,13 @@
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a href="my_list.html">My list(<span id = "count_list"></span>)</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contacts</a></li>
+        <li><a class="modal-trigger" href="#modal1">About</a></li>
+        <li><a href="#footer_page">Contacts</a></li>
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href="my_list.html">My list(<span id = "count_list_mobile"></span>)</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contacts</a></li>
+        <li><a class="waves-effect waves-light btn modal-trigger"  href="#modal1">About</a></li>
+        <li><a href="#footer_page">Contacts</a></li>
       </ul>
     </div>
     </div>
@@ -59,11 +84,11 @@
 </header>
  <main>
 	<form action="#">
-    <p><input type="text" class="text_input" name="input_country" placeholder="type a country name here"></p> 
+    <p><input type="text" id="CountryInput" class="text_input" name="input_country" placeholder="type a country name here"></p> 
     <p><input type="button" class="submit_button" value="submit">
     <input type="button" class="reset_button" value="reset">
     </p>
-		<p> <span id="count"></span> Checked</p>
+		<p id="countText" style="display: none;"> <span id="count"></span> Checked</p>
     
       
       
@@ -73,33 +98,59 @@
       
  
 	<div id="json_table" style="text-align: center;">
+      <p id="message" style="display: none;"></p>
      <div id="loading" style="margin: 0 auto;"> </div>
   </div>		
+
+
+
+
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>About this project</h4>
+      <p style="line-height: 28px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.
+
+      Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
+
+      Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
+
+      Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a,</p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+    </div>
+  </div>
+
+
+
+
 
 </main>
 
 
 
- <footer class="page-footer">
+ <footer class="page-footer" id="footer_page">
           <div class="container">
             <div class="row">
               <div class="col l6 s12">
-                <h5 class="white-text">Footer Content</h5>
-                <p class="grey-text text-lighten-4">You can use rows and columns<br>here to organize your footer content.</p>
+                <h5 class="white-text">Universities list</h5>
+                <p class="grey-text text-lighten-4">Online web application where you can easily find universities by country</p>
               </div>
               <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Links</h5>
+                <h5 class="white-text">Social links</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="https://github.com/Vaynenoir"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a></li>
-                  <li><a class="grey-text text-lighten-3" href="https://bitbucket.org/Vaynenoir/"><i class="fa fa-bitbucket-square fa-2x" aria-hidden="true"></i></a></li>
+                  <li><a class="grey-text text-lighten-3" href="https://github.com/galanix/universities-list"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a></li>
+                 
                 </ul>
               </div>
             </div>
           </div>
           <div class="footer-copyright">
             <div class="container">
-            © 2017 All rights are reserved
-            <a class="grey-text text-lighten-4 right" href="#!"><span id="date"></span></a>
+            © 2017, Galanix. All rights reserved.
+            <p class="grey-text text-lighten-4 right" >Today is: <span id="date"></span></p>
             </div>
           </div>
         </footer>

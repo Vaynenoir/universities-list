@@ -4,7 +4,7 @@ var doc = document;
 var table = doc.createElement('table');
 var jsonTable = doc.querySelector("#json_table");
 var count = 0;
-var JsonChecked = [];
+var jsonSorted = [];
 if (jsonTable.hasChildNodes() == true) {
     document.querySelector('#loading').innerHTML = '<img src="src/js_es6/808.gif" style="margin:0 auto;"/><p>loading...</p>';
 }
@@ -12,15 +12,41 @@ if (jsonTable.hasChildNodes() == true) {
 loadData();
 
 $(".button-collapse").sideNav();
+$('.modal').modal();
+
+var linkNav = document.querySelector('[href^="#footer_page"]'), 
+    V = 0.1; 
+
+    linkNav.addEventListener('click', function(e) { 
+        e.preventDefault();
+        var w = window.pageYOffset, 
+            hash = this.href.replace(/[^#]*(.*)/, '$1'); 
+       var  t = document.querySelector(hash).getBoundingClientRect().top,  
+            start = null;
+        requestAnimationFrame(step);  
+        function step(time) {
+            if (start === null) start = time;
+            var progress = time - start,
+                r = (t < 0 ? Math.max(w - progress/V, w + t) : Math.min(w + progress/V, w + t));
+            window.scrollTo(0,r);
+            if (r != w + t) {
+                requestAnimationFrame(step)
+            } else {
+                location.hash = hash  
+            }
+        }
+    }, false);
 
 var universitiesArray = [];
 
 var checkedID = [];
 
 function displayCount() {
+    if(count > 0 ) doc.querySelector('#countText').style.display = "block";
     doc.querySelector('#count_list').innerHTML = count;
     doc.querySelector('#count').innerHTML = count;
     doc.querySelector('#count_list_mobile').innerHTML = count;
+
 }
 
 function checkboxCount() {
@@ -28,7 +54,7 @@ function checkboxCount() {
     count = doc.querySelectorAll('input[type=checkbox]:checked').length;
     displayCount();
 }
-
+var message = doc.querySelector("#message");
 doc.querySelector(".reset_button").onclick = function () {
     doc.querySelector('.text_input').value = "";
     jsonTable.removeChild(table);
@@ -38,11 +64,26 @@ doc.querySelector(".reset_button").onclick = function () {
     doc.querySelector('#count_list').innerHTML = '0';
     doc.querySelector('#count_list_mobile').innerHTML = '0';
     localStorage.clear();
+    doc.querySelector('#json_table').appendChild(message);
+    message.style.display = "none";
 };
 
 doc.querySelector(".submit_button").onclick = function () {
+
+    if((doc.querySelector('.text_input').value).length == 0){
+      
+        message.innerHTML = "This field should not be empty";
+        message.style.color = "#4db6ac";
+        message.style.fontStyle = "italic";
+        message.style.fontSize = "20px";
+        console.log(message);
+        message.style.display = "block";
+    }
+    else if((doc.querySelector('.text_input').value).length > 0){
+        message.style.display = "none";
     document.querySelector('#loading').innerHTML = '<img src="src/js_es6/808.gif" style="margin:0 auto;"/><p>loading...</p>';
     loadData();
+    }
 };
 
 // console.log($('input'));
@@ -94,10 +135,12 @@ var RealDate = function RealDate(date) {
     return days + '.' + month + '.' + year;
 };
 
-var d = new Date();
-doc.querySelector('#date').innerHTML = RealDate(d);
+var date = new Date();
+doc.querySelector('#date').innerHTML = RealDate(date);
 
 function loadData() {
+
+    displayCount();
 
     var TextInput = doc.querySelector(".text_input").value;
     if (TextInput.length) {
@@ -134,72 +177,102 @@ function loadData() {
 
                 if (text) {
 
-                    table.innerHTML = '<tr> <th>Number</th><th>Country</th><th>Domain</th><th>Name</th><th>Web page</th><th>Save</th> </tr>';
+                    table.innerHTML = '<thead><tr> <th>Number</th><th>Country</th><th>Domain</th><th>Name</th><th>Web page</th><th>Save</th> </tr></thead>';
                 }
 
+                var arr = JSON.parse(localStorage.getItem('selectedJson')) || [];
                 data.forEach(function (d, i) {
 
                     if (text && text.toLowerCase() === d.country.toLowerCase()) {
-                        JsonChecked.push(d);
-                        table.innerHTML += '<tr id="' + number + '"><td>  ' + ++number + '   </td><td>   ' + d.country + '   </td><td>   ' + d.domain + '   </td><td>   ' + d.name + '   </td><td>   ' + d.web_page.link(data[i].web_page) + '   </td>   <td><input id=\'tr_' + number + '\'  type="checkbox"><label for="tr_' + number + '"  ></label></td>';
+                        jsonSorted.push(d);
+                        var check = '';
+
+                        [].forEach.call(arr, function (el) {
+                            if (d.domain == el.domain) {
+                                check = 'checked';
+                                console.log(check);
+                            }
+                        });
+
+                        table.innerHTML += '<tr id="' + number + '"><td>  ' + ++number + '   </td><td>   ' + d.country + '   </td><td>   ' + d.domain + '   </td><td>   ' + d.name + '   </td><td>   ' + d.web_page.link(data[i].web_page) + '   </td>   <td><input id=\'tr_' + number + '\' ' + check + ' type="checkbox"><label for="tr_' + number + '"  >Save</label></td>';
                     }
                 });
-                console.log(JsonChecked);
-                localStorage.setItem('countryJson', JSON.stringify(JsonChecked));
+
+                localStorage.setItem('countryJson', JSON.stringify(jsonSorted));
 
                 document.querySelector('#loading').innerHTML = '';
                 jsonTable.appendChild(table);
 
+                checkboxCount();
+                var jsonChecked = [];
                 [].forEach.call(document.querySelectorAll("input[type='checkbox']"), function (el) {
 
                     el.addEventListener('click', function (el, a) {
                         var data = [];
 
                         var id = this.closest('tr').id;
-                        console.log(id);
                         // console.log(id);
-                        try {
-                            data = JSON.parse(localStorage.getItem('selected')) || [];
-                        } catch (e) {}
+                        // console.log(id);
+
+                        data = JSON.parse(localStorage.getItem('selected')) || [];
 
                         console.log(data);
 
                         if (this.checked) {
                             count += a ? -1 : 1;
+
+                            if (JSON.parse(localStorage.getItem('selectedJson'))) {
+                                jsonChecked = JSON.parse(localStorage.getItem('selectedJson'));
+                            }
+                            jsonChecked.push(jsonSorted[id]);
+                            console.log(jsonChecked);
+                            // console.log(jsonSorted[id]);
+                            console.log(id);
+
                             data.push(id);
                             checkedID.push(this.id);
-                            console.log(checkedID);
+                            // console.log(checkedID);
                             displayCount();
                         } else if (~data.indexOf(id)) {
                             count += a ? 1 : -1;
+                            jsonChecked.splice(id, 1);
+                            console.log(jsonChecked);
+                            checkedID.splice(id, 1);
                             data.splice(data.indexOf(id), 1);
                         }
 
                         displayCount();
-
+                        localStorage.setItem('selectedJson', JSON.stringify(jsonChecked));
+                        localStorage.setItem('countryJson', JSON.stringify(jsonSorted));
                         localStorage.setItem('Checkboxes', checkedID);
                         localStorage.setItem('selected', JSON.stringify(data));
                         displayCount();
+                        // localStorage.setItem('countBox', JSON.stringify(count));
                     });
                 });
 
-                var CheckboxesArray = localStorage.getItem('Checkboxes');
+                // let CheckboxesArray = localStorage.getItem('Checkboxes');
 
-                if (CheckboxesArray !== null) {
-                    var a = CheckboxesArray.split(',');
-                    var arr = [];
-                    for (var i = 0; i < a.length; i++) {
+                // if (CheckboxesArray !== null) {
+                //     let a = CheckboxesArray.split(',');
+                //     var arr = [];
+                //     for (let i = 0; i < a.length; i++) {
 
-                        [].forEach.call(doc.querySelectorAll('#' + a[i]), function (el) {
-                            console.log(1);
-                            el.setAttribute('checked', true);
-                            //     // console.log(arr.push(el));
-                            //     // console.log(arr);
-                        });
-                    }
-                }
+                //         [].forEach.call(doc.querySelectorAll(`#${a[i]}`), function(el) {
+                //             console.log(1);
+                //             el.setAttribute('checked', true);
+                //             //     // console.log(arr.push(el));
+                //             //     // console.log(arr);
 
-                checkboxCount();
+                //         });
+
+                //     }
+
+
+                // }
+
+                // checkboxCount();
+
             }, 2000);
         }
     });
