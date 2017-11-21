@@ -31,9 +31,13 @@ var linkNav = document.querySelector('[href^="#footer_page"]'),
             window.scrollTo(0,r);
             if (r != w + t) {
                 requestAnimationFrame(step)
+
+
             } else {
-                location.hash = hash  
+                return false;  
+
             }
+            return false;
         }
     }, false);
 
@@ -73,9 +77,10 @@ doc.querySelector(".submit_button").onclick = function () {
     if((doc.querySelector('.text_input').value).length == 0){
       
         message.innerHTML = "This field should not be empty";
-        message.style.color = "#4db6ac";
+        message.style.color = "#f44336";
         message.style.fontStyle = "italic";
-        message.style.fontSize = "20px";
+        message.style.fontSize = "25px";
+
         console.log(message);
         message.style.display = "block";
     }
@@ -85,6 +90,28 @@ doc.querySelector(".submit_button").onclick = function () {
     loadData();
     }
 };
+
+$(document).keypress(function (e) {
+    if (e.which == 13) {
+        if((doc.querySelector('.text_input').value).length == 0){
+      
+            message.innerHTML = "This field should not be empty";
+            message.style.color = "#f44336";
+            message.style.fontSize = "20px";
+            console.log(message);
+            message.style.display = "block";
+        }
+        else if((doc.querySelector('.text_input').value).length > 0){
+            message.style.display = "none";
+            document.querySelector('#loading').innerHTML = '<img src="src/js_es6/808.gif" style="margin:0 auto;"/><p>loading...</p>';
+            loadData();
+        }
+    }
+});
+
+
+
+
 
 // console.log($('input'));
 
@@ -175,15 +202,17 @@ function loadData() {
             setTimeout(function () {
                 var number = 0;
 
-                if (text) {
 
-                    table.innerHTML = '<thead><tr> <th>Number</th><th>Country</th><th>Domain</th><th>Name</th><th>Web page</th><th>Save</th> </tr></thead>';
+                if (text) {
+                    table.innerHTML += '<thead><tr> <th>Number</th><th>Country</th><th>Domain</th><th>Name</th><th>Web page</th><th>Save</th> </tr></thead>';
                 }
+
 
                 var arr = JSON.parse(localStorage.getItem('selectedJson')) || [];
                 data.forEach(function (d, i) {
 
                     if (text && text.toLowerCase() === d.country.toLowerCase()) {
+                        
                         jsonSorted.push(d);
                         var check = '';
 
@@ -197,6 +226,8 @@ function loadData() {
                         table.innerHTML += '<tr id="' + number + '"><td>  ' + ++number + '   </td><td>   ' + d.country + '   </td><td>   ' + d.domain + '   </td><td>   ' + d.name + '   </td><td>   ' + d.web_page.link(data[i].web_page) + '   </td>   <td><input id=\'tr_' + number + '\' ' + check + ' type="checkbox"><label for="tr_' + number + '"  >Save</label></td>';
                     }
                 });
+               
+
 
                 localStorage.setItem('countryJson', JSON.stringify(jsonSorted));
 

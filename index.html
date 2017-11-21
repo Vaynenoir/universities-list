@@ -19,18 +19,36 @@
     .grey-text{
       margin: 0;
     }
+    .fa:hover{
+  color: #8ddcd5;
+    transition: 0.2s;
+  }
+      .fa_footer:hover {
+      color: #ffff8d;
+        transition: 0.3s;
+  }
 			@media only screen and (max-width: 920px){
 				div#json_table{
 					width: 100%;
 					margin: 10% 0;
 				}
 			}
+      @media only screen and (max-width: 730px){
+      .brand-logo{
+        font-size: 1.7rem!important;
+      }
+      }
+      @media only screen and (max-width: 530px){
+              .brand-logo{
+        font-size: 1.4rem!important;
+      }
+      }
 
 
 			@media only screen and (max-width: 700px){
 				.submit_button, .reset_button{
-					width: 100px;
-					height: 20px
+					width: 150px;
+					height: 40px
 				}
         td,th{
           border-bottom: 3px solid #ccc!important;
@@ -75,7 +93,7 @@
       </ul>
       <ul class="side-nav" id="mobile-demo">
         <li><a href="my_list.html">My list(<span id = "count_list_mobile"></span>)</a></li>
-        <li><a class="waves-effect waves-light btn modal-trigger"  href="#modal1">About</a></li>
+        <li><a class="modal-trigger"  href="#modal1">About</a></li>
         <li><a href="#footer_page">Contacts</a></li>
       </ul>
     </div>
@@ -141,7 +159,7 @@
               <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Social links</h5>
                 <ul>
-                  <li><a class="grey-text text-lighten-3" href="https://github.com/galanix/universities-list"><i class="fa fa-github-square fa-2x" aria-hidden="true"></i></a></li>
+                  <li><a class="grey-text text-lighten-3" href="https://github.com/galanix/universities-list"><i class="fa fa_footer fa-github-square fa-2x" aria-hidden="true"></i></a></li>
                  
                 </ul>
               </div>

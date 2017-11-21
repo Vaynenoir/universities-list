@@ -17,6 +17,37 @@ $(".button-collapse").sideNav();
 
 setTimeout(loadTable, 2000);
 
+var linkNav = document.querySelector('[href^="#footer_page"]'), 
+    V = 0.4; 
+
+    linkNav.addEventListener('click', function(e) { 
+        e.preventDefault();
+        var w = window.pageYOffset, 
+            hash = this.href.replace(/[^#]*(.*)/, '$1'); 
+       var  t = document.querySelector(hash).getBoundingClientRect().top,  
+            start = null;
+        requestAnimationFrame(step);  
+        function step(time) {
+            if (start === null) start = time;
+            var progress = time - start,
+                r = (t < 0 ? Math.max(w - progress/V, w + t) : Math.min(w + progress/V, w + t));
+            window.scrollTo(0,r);
+            if (r != w + t) {
+                requestAnimationFrame(step)
+            } else {
+                return false;
+                
+                            
+            }
+            
+        }
+        return false;
+    }, false);
+
+
+
+
+
 function loadTable() {
     var RealDate = function RealDate(date) {
 
@@ -51,15 +82,24 @@ function loadTable() {
     document.querySelector('#loading').innerHTML = '';
     var number = 0;
     var commentsID = [];
+    if(jsonData && jsonData.length > 0 ){
     [].forEach.call(jsonData, function (d, i) {
 
         table.innerHTML += '<tr id="' + i + '"><td>  ' + ++number + '   </td><td>   ' + d.country + '   </td><td>   ' + d.domain + '   </td><td>   ' + d.name + '   </td><td>   ' + d.web_page.link(d.web_page) + '   </td>   <td><input id=\'tr_' + number + '\'  type="checkbox"><label for="tr_' + number + '"  ></label></td><td><i id="comment_' + i + '" class="fa fa-commenting-o list_comment waves-effect waves-light modal-trigger" href="#CommentModal"  style="hover:cursor:pointer;" aria-hidden="true"></i></td>';
     });
 
-    console.log(JSON.stringify(jsonData));
     document.querySelector('h1').innerHTML = "UNIVERSITY LIST";
 
     myTable.appendChild(table);
+    doc.getElementById('delete_selected').style.display = "block";
+    }
+    else{
+        document.querySelector('#EmptyListMsg').style.display = "block";
+
+
+    }
+    console.log(JSON.stringify(jsonData));
+
     console.log(jsonData);
     var inputs = document.querySelectorAll("input[type='checkbox']").length;
     localStorage.setItem('inputsOnPage', JSON.stringify(inputs));
@@ -113,7 +153,7 @@ function loadTable() {
                     comment.style.color = "red";
                 } else if (!jsonData[TestID].description) {
                     console.log(jsonData[TestID].description);
-                    document.querySelector('#comment_data').value = "No comment yet!";
+                    document.querySelector('#comment_data').value = "";
                 }
 
                 localStorage.setItem('CommentID', JSON.stringify(TestID));
@@ -140,6 +180,15 @@ function loadTable() {
         localStorage.setItem('selectedJson', JSON.stringify(jsonData));
         delete localStorage['CommentID'];
         console.log(jsonData);
+        
+
+        setTimeout(function(){
+            $('#CommentModal').modal('close');
+        }, 1000);
+
+
+
+
     };
 
     document.querySelector('#delete_selected').onclick = function () {
